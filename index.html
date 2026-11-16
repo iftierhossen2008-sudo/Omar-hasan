@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Omar Hasan! 🎉</title>
+    
+    <!-- Tailwind CSS লোড করা হচ্ছে -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter এবং বাংলা ফন্ট Hind Siliguri -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Confetti অ্যানিমেশনের জন্য লাইব্রেরি -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <!-- সাউন্ড ইফেক্টের জন্য Tone.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <style>
+        /* কাস্টম ফন্ট ও বেস স্টাইল */
+        body {
+            font-family: 'Inter', 'Hind Siliguri', sans-serif;
+            background-color: #070b14;
+            color: #ffffff;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ব্যাকগ্রাউন্ডের লিকুইড অর্বস (Liquid Blobs) অ্যানিমেশন */
+        .liquid-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(85px);
+            z-index: 0;
+            opacity: 0.75;
+            animation: floatOrb 15s infinite ease-in-out alternate;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            width: 390px;
+            height: 390px;
+            background: radial-gradient(circle, #00f2fe 0%, #4facfe 100%);
+            top: -12%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 460px;
+            height: 460px;
+            background: radial-gradient(circle, #f093fb 0%, #f5576c 100%);
+            bottom: -15%;
+            right: -10%;
+            animation-delay: -4s;
+        }
+
+        .orb-3 {
+            width: 340px;
+            height: 340px;
+            background: radial-gradient(circle, #8e2de2 0%, #4a00e0 100%);
+            top: 42%;
+            left: 48%;
+            transform: translate(-50%, -50%);
+            animation-delay: -8s;
+        }
+
+        .orb-4 {
+            width: 270px;
+            height: 270px;
+            background: radial-gradient(circle, #ff9a9e 0%, #fecfef 100%);
+            top: 12%;
+            right: 12%;
+            animation-delay: -2s;
+        }
+
+        @keyframes floatOrb {
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+            33% {
+                transform: translate(45px, -55px) scale(1.1) rotate(15deg);
+            }
+            66% {
+                transform: translate(-35px, 40px) scale(0.95) rotate(-10deg);
+            }
+            100% {
+                transform: translate(25px, 20px) scale(1.06) rotate(6deg);
+            }
+        }
+
+        /* আসল Liquid Glass (Glassmorphism) ইফেক্ট */
+        .liquid-glass {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.04) 100%);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-top: 1px solid rgba(255, 255, 255, 0.48);
+            border-left: 1px solid rgba(255, 255, 255, 0.38);
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.55),
+                inset 0 1px 1px rgba(255, 255, 255, 0.45),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.25);
+        }
+
+        /* লিকুইড গ্লাস বাটন স্টাইল */
+        .glass-btn {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.09) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            box-shadow: 
+                0 10px 28px rgba(0, 242, 254, 0.3),
+                inset 0 1px 2px rgba(255, 255, 255, 0.65);
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .glass-btn:hover::before {
+            left: 100%;
+        }
+
+        .glass-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 
+                0 16px 36px rgba(240, 147, 251, 0.45),
+                inset 0 1px 3px rgba(255, 255, 255, 0.85);
+            border-color: rgba(255, 255, 255, 0.75);
+        }
+
+        .glass-btn:active {
+            transform: translateY(1px) scale(0.98);
+        }
+
+        /* অ্যানিমেটেড গ্রেডিয়েন্ট টেক্সট */
+        .gradient-text {
+            background: linear-gradient(270deg, #00f2fe, #ff9a9e, #f093fb, #4facfe, #00f2fe);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientFlow 6s ease infinite;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* কার্ড ট্রানজিশন অ্যানিমেশন */
+        .fade-out-scale {
+            opacity: 0;
+            transform: scale(0.9) translateY(-20px);
+            pointer-events: none;
+        }
+
+        .fade-in-scale {
+            animation: revealCard 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes revealCard {
+            0% {
+                opacity: 0;
+                transform: scale(0.88) translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* ভাসমান বেলুন অ্যানিমেশন */
+        .floating-emoji {
+            position: fixed;
+            bottom: -50px;
+            font-size: 2rem;
+            user-select: none;
+            pointer-events: none;
+            z-index: 5;
+            animation: riseUp linear forwards;
+        }
+
+        @keyframes riseUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(-115vh) rotate(25deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-6 relative selection:bg-pink-500 selection:text-white">
+
+    <!-- ব্যাকগ্রাউন্ডের লিকুইড অর্বস -->
+    <div class="liquid-orb orb-1"></div>
+    <div class="liquid-orb orb-2"></div>
+    <div class="liquid-orb orb-3"></div>
+    <div class="liquid-orb orb-4"></div>
+
+    <!-- ভাসমান বেলুন কন্টেইনার -->
+    <div id="balloons-container"></div>
+
+    <!-- ===================================================================== -->
+    <!-- ধাপ ১: প্রাথমিক ল্যান্ডিং স্ক্রিন (Initial Landing Screen)             -->
+    <!-- ===================================================================== -->
+    <section id="landing-screen" class="relative z-10 w-full max-w-md transition-all duration-500">
+        <div class="liquid-glass rounded-3xl p-8 sm:p-10 text-center">
+            <!-- গ্লোয়িং গিফট আইকন -->
+            <div class="w-20 h-20 mx-auto mb-6 rounded-2xl liquid-glass flex items-center justify-center text-4xl shadow-lg animate-bounce">
+                🎁
+            </div>
+
+            <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-white/10 border border-white/25 text-cyan-200 mb-4">
+                Special Surprise For Omar Hasan
+            </span>
+
+            <h1 class="text-2xl sm:text-3xl font-bold text-white mb-3 leading-snug">
+                ওমর হাসান, তোমার জন্য একটি বিশেষ সারপ্রাইজ আছে! ✨
+            </h1>
+            
+            <p class="text-gray-200/85 text-sm sm:text-base mb-8 leading-relaxed">
+                আজকের এই বিশেষ দিনটিকে আরও একটু স্মরণীয় করতে নিচের বাটনটিতে ক্লিক করো...
+            </p>
+
+            <!-- সারপ্রাইজ ওপেন করার বাটন -->
+            <button id="reveal-btn" onclick="openBirthdaySurprise()" class="glass-btn w-full py-4 px-6 rounded-2xl font-bold text-lg text-white flex items-center justify-center gap-3 cursor-pointer">
+                <span>Tap to Open • উইশটি দেখুন</span>
+                <span class="text-2xl">🎉</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- ধাপ ২: মূল বার্থডে উইশ এবং ভিডিও কার্ড (Main Birthday Card)           -->
+    <!-- ===================================================================== -->
+    <main id="birthday-card" class="hidden relative z-10 w-full max-w-2xl my-6">
+        <div class="liquid-glass rounded-3xl p-6 sm:p-10 relative overflow-hidden">
+            
+            <!-- উপরের ডেকোরেটিভ ব্যাজ এবং সাউন্ড বাটন -->
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
+                <span class="px-4 py-1.5 rounded-full text-xs font-semibold bg-white/15 border border-white/25 text-pink-200 flex items-center gap-1.5">
+                    <span>🎂</span> Happy Birthday Celebration
+                </span>
+                
+                <div class="flex items-center gap-2">
+                    <!-- পুনরায় কনফেটি ফোটানোর বাটন -->
+                    <button onclick="triggerConfettiBurst()" title="More Confetti!" class="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-sm transition cursor-pointer">
+                        🎊
+                    </button>
+                    <!-- মিউজিক প্লে/পজ বাটন -->
+                    <button id="music-toggle-btn" onclick="toggleBirthdayTune()" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-medium text-white flex items-center gap-1.5 transition cursor-pointer">
+                        <span id="music-icon">🎵</span>
+                        <span id="music-text">Play Tune</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- প্রধান হেডলাইন -->
+            <div class="text-center mb-6">
+                <h1 class="text-3xl sm:text-5xl font-extrabold gradient-text tracking-tight mb-3 py-1 leading-tight">
+                    Happy Birthday, Omar Hasan!
+                </h1>
+                
+                <h2 id="cousin-name" class="text-xl sm:text-2xl font-bold text-white/95">
+                    শুভ জন্মদিন প্রিয় কাজিন ওমর হাসান 💖
+                </h2>
+            </div>
+
+            <!-- জন্মদিনের শুভেচ্ছা বার্তা (Wish Message) -->
+            <div class="bg-white/5 border border-white/15 rounded-2xl p-5 sm:p-6 mb-8 text-center backdrop-blur-md">
+                <p id="wish-message" class="text-gray-100 text-base sm:text-lg leading-relaxed">
+                    শুভ জন্মদিন ওমর! 🥳 তোমার জীবনের প্রতিটি দিন যেন আনন্দ, হাসি আর সাফল্যে ভরে ওঠে। আমাদের একসাথে কাটানো সেরা মুহূর্তগুলোর মতোই যেন তোমার সামনের দিনগুলো সুন্দর ও রঙিন হয়। অনেক অনেক ভালোবাসা ও শুভকামনা রইল! ✨🎂🎈
+                </p>
+            </div>
+
+            <!-- ============================================================= -->
+            <!-- ছোট ভিডিও সেকশন (Vertical / Vintage Memory Video Frame)       -->
+            <!-- ============================================================= -->
+            <div class="mb-6">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3 px-1">
+                    <h3 class="text-sm sm:text-base font-semibold text-cyan-200 flex items-center gap-2">
+                        <span>🎞️</span> Our Favorite Memory ✨
+                    </h3>
+                    
+                    <!-- সরাসরি ডিভাইস থেকে ভিডিও সিলেক্ট করে প্রিভিউ দেখার বাটন -->
+                    <label for="video-upload" class="cursor-pointer px-3 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 border border-white/30 text-xs font-medium text-white transition flex items-center gap-1.5">
+                        <span>📁</span> ভিডিও সিলেক্ট করুন
+                    </label>
+                    <input type="file" id="video-upload" accept="video/*" class="hidden" onchange="handleVideoUpload(event)">
+                </div>
+
+                <!-- লিকুইড গ্লাস ভার্টিকাল/ভিন্টেজ ভিডিও ফ্রেম -->
+                <div class="max-w-sm mx-auto rounded-3xl p-2.5 liquid-glass shadow-2xl relative">
+                    <div class="rounded-2xl overflow-hidden border border-white/25 bg-black/75 relative group aspect-[3/4] flex items-center justify-center">
+                        <!-- 
+                            আপলোড করা ভিডিও ফাইলটি সরাসরি এখানে যুক্ত করা হয়েছে।
+                            এই HTML ফাইলটি এবং ভিডিও ফাইলটি একই ফোল্ডারে রাখলে স্বয়ংক্রিয়ভাবে প্লে হবে।
+                        -->
+                        <video 
+                            id="birthday-video" 
+                            class="w-full h-full object-cover block" 
+                            controls 
+                            playsinline
+                            preload="metadata">
+                            
+                            <!-- মূল আপলোড করা ভিডিও সোর্স এবং ফলব্যাক সোর্সসমূহ -->
+                            <source src="copy_A5181C5C-22AA-4FFC-ACEE-1863211AE91C.mov" type="video/quicktime">
+                            <source src="copy_A5181C5C-22AA-4FFC-ACEE-1863211AE91C.mov" type="video/mp4">
+                            <source src="video_1.mov" type="video/quicktime">
+                            <source src="birthday-video.mp4" type="video/mp4">
+                            আপনার ব্রাউজার ভিডিওটি সাপোর্ট করছে না।
+                        </video>
+
+                        <!-- ভিডিও ফাইল ফোল্ডারে না পাওয়া গেলে সুন্দর ফলব্যাক ওভারলে -->
+                        <div id="video-fallback-overlay" class="hidden absolute inset-0 bg-slate-950/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center">
+                            <span class="text-4xl mb-3">🎥</span>
+                            <p class="text-white font-semibold text-base mb-1.5">Our Favorite Memory ✨</p>
+                            <p class="text-gray-300 text-xs leading-relaxed mb-5">
+                                ব্রাউজার সিকিউরিটির কারণে লোকাল ভিডিও অটো-লোড না হলে নিচের বাটন থেকে <strong>copy_A5181C5C-22AA-4FFC-ACEE-1863211AE91C.mov</strong> ভিডিওটি সিলেক্ট করুন।
+                            </p>
+                            <button onclick="document.getElementById('video-upload').click()" class="glass-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white cursor-pointer">
+                                গ্যালারি থেকে ভিডিও বাছুন
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ভিডিওর নিচে ভিন্টেজ মেমোরি ক্যাপশন -->
+                    <div class="pt-2.5 pb-1 px-2 flex items-center justify-between text-xs text-white/80">
+                        <span class="font-medium tracking-wide">✨ Vintage Brothers Vibe</span>
+                        <span class="text-cyan-200/90 font-semibold">Omar & Cousin</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- নিচের ফুটার টেক্সট -->
+            <div class="text-center pt-3 border-t border-white/15">
+                <p class="text-xs sm:text-sm text-white/75">
+                    Made with ❤️ just for Omar Hasan • Enjoy your special day!
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- কাস্টম নোটিফিকেশন টোস্ট -->
+    <div id="toast-msg" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 liquid-glass px-5 py-3 rounded-2xl text-sm font-medium text-white opacity-0 pointer-events-none transition-opacity duration-300">
+        ভিডিও লোড হয়েছে! 🎉
+    </div>
+
+    <script>
+        // ১. সারপ্রাইজ বাটনে ক্লিক করলে যা ঘটবে
+        function openBirthdaySurprise() {
+            const landingScreen = document.getElementById('landing-screen');
+            const birthdayCard = document.getElementById('birthday-card');
+
+            // কনফেটি ফোটানো শুরু
+            triggerConfettiBurst();
+
+            // হালকা মিউজিকাল চিম বাজানো
+            playCelebrationChime();
+
+            // ল্যান্ডিং স্ক্রিন হাইড করে মূল কার্ড দেখানো
+            landingScreen.classList.add('fade-out-scale');
+            
+            setTimeout(() => {
+                landingScreen.classList.add('hidden');
+                birthdayCard.classList.remove('hidden');
+                birthdayCard.classList.add('fade-in-scale');
+                
+                // ভাসমান বেলুন শুরু করা
+                startFloatingBalloons();
+                
+                // ভিডিও প্লে করার চেষ্টা করা
+                const video = document.getElementById('birthday-video');
+                video.play().catch(() => {
+                    // ব্রাউজার অটো-প্লে ব্লক করলে ইউজার নিজে প্লে বাটনে ক্লিক করবে
+                });
+            }, 450);
+        }
+
+        // ২. রঙিন কনফেটি অ্যানিমেশন ফাংশন
+        function triggerConfettiBurst() {
+            const duration = 3 * 1000;
+            const end = Date.now() + duration;
+
+            confetti({
+                particleCount: 100,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#00f2fe', '#f093fb', '#ff9a9e', '#ffd700', '#4facfe']
+            });
+
+            (function frame() {
+                confetti({
+                    particleCount: 4,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#00f2fe', '#f093fb', '#ffffff']
+                });
+                confetti({
+                    particleCount: 4,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ff9a9e', '#4facfe', '#ffd700']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        // ৩. ব্যাকগ্রাউন্ডে ভাসমান বেলুন ও ইমোজি তৈরি
+        function startFloatingBalloons() {
+            const container = document.getElementById('balloons-container');
+            const emojis = ['🎈', '🎂', '✨', '🎉', '💖', '🥳'];
+            
+            setInterval(() => {
+                const el = document.createElement('div');
+                el.classList.add('floating-emoji');
+                el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                el.style.left = Math.random() * 95 + 'vw';
+                el.style.animationDuration = (Math.random() * 5 + 6) + 's';
+                el.style.fontSize = (Math.random() * 1.2 + 1.2) + 'rem';
+                
+                container.appendChild(el);
+                
+                setTimeout(() => {
+                    el.remove();
+                }, 11000);
+            }, 1400);
+        }
+
+        // ৪. ডিভাইস থেকে লোকাল ভিডিও সিলেক্ট করে প্লে করার ফাংশন
+        function handleVideoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const videoPlayer = document.getElementById('birthday-video');
+                const fallbackOverlay = document.getElementById('video-fallback-overlay');
+                
+                const fileURL = URL.createObjectURL(file);
+                videoPlayer.src = fileURL;
+                videoPlayer.load();
+                
+                fallbackOverlay.classList.add('hidden');
+                videoPlayer.play().catch(e => console.log("Playback interaction needed"));
+                
+                showToast("ভিডিওটি সফলভাবে যুক্ত হয়েছে! 🎬");
+            }
+        }
+
+        // সব সোর্স লোড হতে ব্যর্থ হলে ফলব্যাক ওভারলে দেখানো
+        const videoElement = document.getElementById('birthday-video');
+        const sources = videoElement.querySelectorAll('source');
+        let failedSourcesCount = 0;
+
+        sources.forEach(source => {
+            source.addEventListener('error', () => {
+                failedSourcesCount++;
+                if (failedSourcesCount >= sources.length) {
+                    document.getElementById('video-fallback-overlay').classList.remove('hidden');
+                }
+            });
+        });
+
+        // কাস্টম টোস্ট মেসেজ ফাংশন
+        function showToast(message) {
+            const toast = document.getElementById('toast-msg');
+            toast.innerText = message;
+            toast.classList.remove('opacity-0');
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+            }, 3000);
+        }
+
+        // ৫. Tone.js দিয়ে মিষ্টি হ্যাপি বার্থডে সুর
+        let isPlayingMusic = false;
+        let melodyLoop = null;
+
+        async function playCelebrationChime() {
+            try {
+                await Tone.start();
+                const synth = new Tone.PolySynth(Tone.Synth, {
+                    oscillator: { type: "sine" },
+                    envelope: { attack: 0.05, decay: 0.2, sustain: 0.3, release: 1 }
+                }).toDestination();
+                synth.volume.value = -8;
+                
+                const now = Tone.now();
+                synth.triggerAttackRelease("C5", "8n", now);
+                synth.triggerAttackRelease("E5", "8n", now + 0.12);
+                synth.triggerAttackRelease("G5", "8n", now + 0.24);
+                synth.triggerAttackRelease("C6", "4n", now + 0.36);
+            } catch (err) {
+                console.log("Audio context waiting for interaction");
+            }
+        }
+
+        async function toggleBirthdayTune() {
+            const btnText = document.getElementById('music-text');
+            const btnIcon = document.getElementById('music-icon');
+
+            if (isPlayingMusic) {
+                Tone.Transport.stop();
+                if (melodyLoop) melodyLoop.dispose();
+                isPlayingMusic = false;
+                btnText.innerText = "Play Tune";
+                btnIcon.innerText = "🎵";
+                return;
+            }
+
+            try {
+                await Tone.start();
+                const synth = new Tone.Synth({
+                    oscillator: { type: "triangle" },
+                    envelope: { attack: 0.04, decay: 0.2, sustain: 0.4, release: 0.8 }
+                }).toDestination();
+                synth.volume.value = -10;
+
+                const notes = [
+                    { note: "C4", dur: "8n", time: 0 },
+                    { note: "C4", dur: "8n", time: 0.3 },
+                    { note: "D4", dur: "4n", time: 0.6 },
+                    { note: "C4", dur: "4n", time: 1.1 },
+                    { note: "F4", dur: "4n", time: 1.6 },
+                    { note: "E4", dur: "2n", time: 2.1 },
+
+                    { note: "C4", dur: "8n", time: 3.0 },
+                    { note: "C4", dur: "8n", time: 3.3 },
+                    { note: "D4", dur: "4n", time: 3.6 },
+                    { note: "C4", dur: "4n", time: 4.1 },
+                    { note: "G4", dur: "4n", time: 4.6 },
+                    { note: "F4", dur: "2n", time: 5.1 },
+
+                    { note: "C4", dur: "8n", time: 6.0 },
+                    { note: "C4", dur: "8n", time: 6.3 },
+                    { note: "C5", dur: "4n", time: 6.6 },
+                    { note: "A4", dur: "4n", time: 7.1 },
+                    { note: "F4", dur: "4n", time: 7.6 },
+                    { note: "E4", dur: "4n", time: 8.1 },
+                    { note: "D4", dur: "2n", time: 8.6 },
+
+                    { note: "Bb4", dur: "8n", time: 9.5 },
+                    { note: "Bb4", dur: "8n", time: 9.8 },
+                    { note: "A4", dur: "4n", time: 10.1 },
+                    { note: "F4", dur: "4n", time: 10.6 },
+                    { note: "G4", dur: "4n", time: 11.1 },
+                    { note: "F4", dur: "2n", time: 11.6 }
+                ];
+
+                melodyLoop = new Tone.Part((time, value) => {
+                    synth.triggerAttackRelease(value.note, value.dur, time);
+                }, notes).start(0);
+
+                melodyLoop.loop = true;
+                melodyLoop.loopEnd = 13;
+
+                Tone.Transport.start();
+                isPlayingMusic = true;
+                btnText.innerText = "Stop Tune";
+                btnIcon.innerText = "⏸️";
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    </script>
+</body>
+</html>
